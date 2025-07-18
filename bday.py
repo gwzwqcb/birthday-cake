@@ -26,27 +26,21 @@ def main(stdscr):
                 minor_decs.append([y, x, bg_char])
             if y > 7:
                 continue
-            if bg_char == "(" and x + 2 < len(bg_line) and bg_line[x + 2] != ")":
-                main_dec.append([y, x, bg_char])
-            if bg_char == ")" and x > 1 and bg_line[x - 2] != "(":
-                main_dec.append([y, x, bg_char])
+            if bg_char in "()":
+                if bg_char is "(" and bg_line[x + 2] is not ")":
+                    main_dec.append([y, x, bg_char])
+                if bg_char is ")" and bg_line[x - 2] is not "(":
+                    main_dec.append([y, x, bg_char])
 
     stdscr.addstr(0, 0, bg_frame)
     stdscr.refresh()
 
     denominator = 3
     finalized = False
-
-    while True:
-        keyin = stdscr.getch()
-        # press any key to stop animation and 'q' to quit.
-        if keyin != -1:
-            if finalized:
-                break
+    keyin = stdscr.getch()
+    while keyin is -1 or not finalized:
+        if keyin is not -1:
             finalized = True
-
-        if keyin == ord("q"):
-            break
 
         random.shuffle(main_dec)
         random.shuffle(minor_decs)
@@ -68,6 +62,7 @@ def main(stdscr):
         stdscr.move(0, 0)
         stdscr.refresh()
         time.sleep(0.1)
+        keyin = stdscr.getch()
 
 
 if __name__ == "__main__":
