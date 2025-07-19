@@ -27,7 +27,7 @@ def main(stdscr):
             if y > 7:
                 continue
             if bg_char in "()":
-                if bg_char is "(" and bg_line[x + 2] is not ")":
+                if bg_char == "(" and bg_line[x + 2] != ")":
                     main_dec.append([y, x, bg_char])
                 if bg_char is ")" and bg_line[x - 2] is not "(":
                     main_dec.append([y, x, bg_char])
