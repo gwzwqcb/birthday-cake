@@ -38,8 +38,8 @@ def main(stdscr):
     denominator = 3
     finalized = False
     keyin = stdscr.getch()
-    while keyin is -1 or not finalized:
-        if keyin is not -1:
+    while keyin == -1 or not finalized:
+        if keyin != -1:
             finalized = True
 
         random.shuffle(main_dec)
